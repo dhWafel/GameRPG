@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Gate1
+  - Castle1
+  - Gate2
+  - Enemy1
+  - Eq_slot
   layers:
   - Default
   - TransparentFX
@@ -13,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Moveable_item
   - 
   - 
   - 
