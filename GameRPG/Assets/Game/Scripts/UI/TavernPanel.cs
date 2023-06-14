@@ -32,7 +32,7 @@
                 gossip = "Córka młynarza zakochała się w księciu Teosiu.";
             }
             if (a == 3) {
-                gossip = "Żona kowala nosi różowe stringi.";
+                gossip = "Kowal Ben nosi różowe stringi.";
             }
             if (a == 4) {
                 gossip = "Plotka4";

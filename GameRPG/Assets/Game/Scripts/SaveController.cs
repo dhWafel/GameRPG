@@ -40,6 +40,10 @@ public class SaveController : MonoBehaviour{
         PlayerPrefs.SetInt("manaMaxSave", PlayerStatisticController.Instance.mana.valueMax);
         PlayerPrefs.SetInt("expSave", PlayerStatisticController.Instance.exp.value);
         PlayerPrefs.SetInt("expMaxSave", PlayerStatisticController.Instance.exp.valueMax);
+        PlayerPrefs.SetInt("playerLvSave", PlayerStatisticController.Instance.playerLevel);
+        PlayerPrefs.SetInt("playerApSave", PlayerStatisticController.Instance.playerAp);
+        PlayerPrefs.SetInt("playerSpSave", PlayerStatisticController.Instance.playerSp);
+        
     }
 
     public void SavePlayerPosition() {

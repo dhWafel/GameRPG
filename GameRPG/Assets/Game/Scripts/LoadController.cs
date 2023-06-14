@@ -37,6 +37,9 @@ public class LoadController : MonoBehaviour{
         PlayerStatisticController.Instance.mana.valueMax = PlayerPrefs.GetInt("manaMaxSave");
         PlayerStatisticController.Instance.exp.value = PlayerPrefs.GetInt("expSave");
         PlayerStatisticController.Instance.exp.valueMax = PlayerPrefs.GetInt("expMaxSave");
+        PlayerStatisticController.Instance.playerLevel = PlayerPrefs.GetInt("playerLvSave");
+        PlayerStatisticController.Instance.playerAp = PlayerPrefs.GetInt("playerApSave");
+        PlayerStatisticController.Instance.playerSp = PlayerPrefs.GetInt("playerSpSave");
     }
 
     public void LoadPlayerPosition() {

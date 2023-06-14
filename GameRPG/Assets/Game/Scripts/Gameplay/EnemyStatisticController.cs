@@ -22,6 +22,10 @@ public class EnemyStatisticController : MonoSingleton<EnemyStatisticController>{
         SpawnEnemy();
     }
 
+    private void Update() {   
+        //SpawnEnemy();
+    }
+
     private Game.Data.Enemy LoadEnemy() {
         string path = Application.dataPath + Game.Const.c_enemiesPath;
         if (File.Exists(path)) {

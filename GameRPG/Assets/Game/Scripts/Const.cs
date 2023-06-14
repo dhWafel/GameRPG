@@ -11,7 +11,7 @@
         public const string c_ingredientsPath = "/File/ingredients.csv";
         public const string c_recipesPath = "/File/recipes.csv";
 
-        public const float playerSpeed = 60.0f;
+        public const float playerSpeed = 6.0f;
 
         public const int startHp = 100;
         public const int startHpMax = 100;

@@ -6,11 +6,11 @@ public class PanelEffects : MonoBehaviour{
     
     public void MoveButton() {
         transform.Translate(0, 5, 0);
-        Debug.Log("na guziku");
+        //Debug.Log("na guziku");
     }
     public void RemoveButton() {
         transform.Translate(0, -5, 0);
-        Debug.Log("za guzikiem");
+        //Debug.Log("za guzikiem");
     }
 
     public void ClickButton() {

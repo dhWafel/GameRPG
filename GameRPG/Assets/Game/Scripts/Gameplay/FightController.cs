@@ -32,7 +32,6 @@ public class FightController : MonoBehaviour{
         int deffEnemy = EnemyStatisticController.Instance.enemy.armor/15;
         damage = a * (attackPlayer - deffEnemy);
 
-         StartCoroutine(WaitForTime((int)0.2f, () => {
              if (a == 1) {
                  EnemyStatisticController.Instance.enemyLife.value -= damage;
              }
@@ -45,7 +44,7 @@ public class FightController : MonoBehaviour{
              if (a == 4) {
                  EnemyStatisticController.Instance.enemyLife.value -= damage;
              }
-         }));
+ 
          Debug.Log("damage: " + damage);
         IsPlayerMove = false;
     }
@@ -137,9 +136,9 @@ public class FightController : MonoBehaviour{
             GetGold();
             GetIngredients();
             lockUpdate = true;
-            StartCoroutine(WaitForTime(2, () => {
-                blockImage.gameObject.SetActive(false);
-                EnemyStatisticController.Instance.SpawnEnemy();
+            StartCoroutine(WaitForTime(10, () => {
+                //EnemyStatisticController.Instance.SpawnEnemy();
+                blockImage.gameObject.SetActive(false);  
                 lockUpdate = false;
             }));
             EnemyStatisticController.Instance.enemy = null;  
@@ -226,7 +225,7 @@ public class FightController : MonoBehaviour{
             int attackEnemy = EnemyStatisticController.Instance.enemy.atak;
             int deffPlayer = PlayerStatisticController.Instance.defense.value;
             int damage = attackEnemy - deffPlayer;
-            StartCoroutine(WaitForTime(3, () => {
+            StartCoroutine(WaitForTime(5, () => {
                 PlayerStatisticController.Instance.life.value -= damage;
             }));
             IsPlayerMove = true;
