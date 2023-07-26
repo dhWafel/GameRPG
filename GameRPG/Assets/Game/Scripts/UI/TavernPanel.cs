@@ -8,10 +8,16 @@
         [SerializeField]
         private GameObject m_room;
 
+        [SerializeField]
+        private GameObject veryficationRoomPanel;
+        [SerializeField]
+        private GameObject NoApprovalRoomPanel;
+
 
         public Text questMessageTxt;
         public Text questDiscriptionTxt;
         public Text executionTxt;
+        public Text costRoomTxt;
 
         private string gossip;
         private string execution;
@@ -21,6 +27,7 @@
         private string questNo;
 
         private int rand;
+        private int costRoom;
 
         public void WritteGossipTxt() {
             int a = Random.Range(1, 11);
@@ -35,13 +42,13 @@
                 gossip = "Kowal Ben nosi różowe stringi.";
             }
             if (a == 4) {
-                gossip = "Plotka4";
+                gossip = "Idąc na wschód od 'Bramy Słońca' trafisz do zapomnianej świątyni 'Sióstr Niewidzącego Oka'.";
             }
             if (a == 5) {
-                gossip = "Plotka5";
+                gossip = "Wynalezienie łomu otworzyło drzwi do kariery wielu złodziejom.";
             }
             if (a == 6) {
-                gossip = "Plotka6";
+                gossip = "Powiedzieć 'przepraszam' bywa trudno. Powiedzieć 'kocham' jeszcze trudniej, ale powiedzieć 'nie lej już więcej' to jest już nie wykonalne.";
             }
             if (a == 7) {
                 gossip = "Plotka7";
@@ -69,32 +76,53 @@
         }
 
         public void WritteRoom(int g) {
+            costRoom = 0;
             VisibleRoom();
             if (PlayerStatisticController.Instance.gold.value >= 0) {
                 if (g == 1) {
+                    costRoom = 5;
                     if (PlayerStatisticController.Instance.gold.value >= 5) {
-                        PlayerStatisticController.Instance.gold.value -= 5;
-                    } else { Debug.Log("brak kasy"); }
+                        costRoomTxt.text = costRoom.ToString();
+                        veryficationRoomPanel.SetActive(true);
+                    } else {
+                        NoApprovalRoomPanel.SetActive(true);
+                        Debug.Log("brak kasy"); }
                 }
                 if (g == 2) {
+                    costRoom = 20;
                     if (PlayerStatisticController.Instance.gold.value >= 20) {
-                        PlayerStatisticController.Instance.gold.value -= 20;
-                    } else { Debug.Log("brak kasy"); }
+                        costRoomTxt.text = costRoom.ToString();
+                        veryficationRoomPanel.SetActive(true);
+                    } else {
+                        NoApprovalRoomPanel.SetActive(true);
+                        Debug.Log("brak kasy"); }
                 }
                 if (g == 3) {
+                    costRoom = 100;
                     if (PlayerStatisticController.Instance.gold.value >= 100) {
-                        PlayerStatisticController.Instance.gold.value -= 100;
-                    } else { Debug.Log("brak kasy"); }
+                        costRoomTxt.text = costRoom.ToString();
+                        veryficationRoomPanel.SetActive(true);
+                    } else {
+                        NoApprovalRoomPanel.SetActive(true);
+                        Debug.Log("brak kasy"); }
                 }
                 if (g == 4) {
+                    costRoom = 200;
                     if (PlayerStatisticController.Instance.gold.value >= 200) {
-                        PlayerStatisticController.Instance.gold.value -= 200;
-                    } else { Debug.Log("brak kasy"); }
+                        costRoomTxt.text = costRoom.ToString();
+                        veryficationRoomPanel.SetActive(true);
+                    } else {
+                        NoApprovalRoomPanel.SetActive(true);
+                        Debug.Log("brak kasy"); }
                 }
                 if (g == 5) {
+                    costRoom = 500;
                     if (PlayerStatisticController.Instance.gold.value >= 500) {
-                        PlayerStatisticController.Instance.gold.value -= 500;
-                    } else { Debug.Log("brak kasy"); }
+                        costRoomTxt.text = costRoom.ToString();
+                        veryficationRoomPanel.SetActive(true);
+                    } else {
+                        NoApprovalRoomPanel.SetActive(true);
+                        Debug.Log("brak kasy"); }
                 }
             }
         }
@@ -128,6 +156,12 @@
             executionTxt.gameObject.SetActive(true);
             m_quest.SetActive(false);
             m_room.SetActive(false);
+        }
+
+        public void AcceptRoom() {
+            PlayerStatisticController.Instance.gold.value -= costRoom;
+            PlayerStatisticController.Instance.life.value = PlayerStatisticController.Instance.life.valueMax;
+            PlayerStatisticController.Instance.mana.value = PlayerStatisticController.Instance.mana.valueMax;
         }
     }
 }

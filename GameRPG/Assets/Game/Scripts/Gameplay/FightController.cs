@@ -19,6 +19,15 @@ public class FightController : MonoBehaviour{
     [SerializeField]
     private Image blockImage;
 
+    [SerializeField]
+    private Image endFightPanel;
+
+    [SerializeField]
+    private Text expTxt;
+
+    [SerializeField]
+    private Text goldTxt;
+
     private void Start() {
         IsPlayerMove = true;
     }
@@ -27,7 +36,8 @@ public class FightController : MonoBehaviour{
         if (EnemyStatisticController.Instance.enemy == null) {
             return;
         }
-        m_attack.SetTrigger("IsAttack");
+        StartCoroutine(WaitForTime(5, () => { m_attack.SetTrigger("IsAttack"); }));
+        //m_attack.SetTrigger("IsAttack");
         int attackPlayer= (2 * DiceRolls.ThrowDice(4)) + (PlayerStatisticController.Instance.strength.value * DiceRolls.ThrowDice(6));
         int deffEnemy = EnemyStatisticController.Instance.enemy.armor/15;
         damage = a * (attackPlayer - deffEnemy);
@@ -132,12 +142,13 @@ public class FightController : MonoBehaviour{
     public void CheckIfEnemyIsDead() {
         if (EnemyStatisticController.Instance.enemy != null && EnemyStatisticController.Instance.enemyLife.value == 0) {
             blockImage.gameObject.SetActive(true);
+            endFightPanel.gameObject.SetActive(true);
             GetExp();
             GetGold();
             GetIngredients();
             lockUpdate = true;
-            StartCoroutine(WaitForTime(10, () => {
-                //EnemyStatisticController.Instance.SpawnEnemy();
+            StartCoroutine(WaitForTime(5, () => {
+                EnemyStatisticController.Instance.SpawnEnemy();
                 blockImage.gameObject.SetActive(false);  
                 lockUpdate = false;
             }));
@@ -153,53 +164,70 @@ public class FightController : MonoBehaviour{
 
     public void GetExp() {
         float a = Game.DifficultyController.Instance.activeDifficultyData.expMultiplier;
+        int b = 0;
         Debug.Log(a);
         if (EnemyStatisticController.Instance.enemy.lvl > 8) {
+            b = 500;
             PlayerStatisticController.Instance.exp.value += 500;
         }
         if (EnemyStatisticController.Instance.enemy.lvl > 5) {
+            b = 300;
             PlayerStatisticController.Instance.exp.value += 300;
         }
         if (EnemyStatisticController.Instance.enemy.lvl > 3) {
+            b = 200;
             PlayerStatisticController.Instance.exp.value += 200;
         }
         if (EnemyStatisticController.Instance.enemy.lvl >= 1) {
+            b = 100;
             PlayerStatisticController.Instance.exp.value  += (int)(100*a);
         }
+        expTxt.text = b.ToString();
     }
 
     public void GetGold() {
+        int a = 0;
         if (EnemyStatisticController.Instance.enemy.lvl == 10) {
+            a = 370;
             PlayerStatisticController.Instance.gold.value += 370;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 9) {
+            a = 300;
             PlayerStatisticController.Instance.gold.value += 300;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 8) {
+            a = 250;
             PlayerStatisticController.Instance.gold.value += 250;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 7) {
+            a = 200;
             PlayerStatisticController.Instance.gold.value += 200;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 6) {
+            a = 170;
             PlayerStatisticController.Instance.gold.value += 170;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 5) {
+            a = 130;
             PlayerStatisticController.Instance.gold.value += 130;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 4) {
+            a = 80;
             PlayerStatisticController.Instance.gold.value += 80;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 3) {
+            a = 50;
             PlayerStatisticController.Instance.gold.value += 50;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 2) {
+            a = 30;
             PlayerStatisticController.Instance.gold.value += 30;
         }
         if (EnemyStatisticController.Instance.enemy.lvl == 1) {
+            a = 10;
             PlayerStatisticController.Instance.gold.value += 10;
         }
-
+        goldTxt.text = a.ToString();
     }
 
     public void GetIngredients() {
@@ -225,7 +253,7 @@ public class FightController : MonoBehaviour{
             int attackEnemy = EnemyStatisticController.Instance.enemy.atak;
             int deffPlayer = PlayerStatisticController.Instance.defense.value;
             int damage = attackEnemy - deffPlayer;
-            StartCoroutine(WaitForTime(5, () => {
+            StartCoroutine(WaitForTime(3, () => {
                 PlayerStatisticController.Instance.life.value -= damage;
             }));
             IsPlayerMove = true;
