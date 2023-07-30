@@ -7,6 +7,13 @@
         private GameObject m_quest;
         [SerializeField]
         private GameObject m_room;
+        [SerializeField] 
+        private GameObject m_greetings;
+        [SerializeField]
+        private GameObject m_gossip;
+
+
+
 
         [SerializeField]
         private GameObject veryficationRoomPanel;
@@ -29,17 +36,25 @@
         private int rand;
         private int costRoom;
 
-        public void WritteGossipTxt() {
-            int a = Random.Range(1, 11);
+        public void GreetingsTavern() {
             OffTavernPanels();
+            m_greetings.SetActive(true);
+        }
+
+
+        public void WritteGossipTxt() {
+            //OffTavernPanels();
+            VisibleGossip();
+            int a = Random.Range(1, 11);
+
             if (a == 1) {
                 gossip = "Pączki u piekarza Franka są najlepsze na świecie.";
             }
             if (a == 2) {
-                gossip = "Córka młynarza zakochała się w księciu Teosiu.";
+                gossip = "Córka młynarza Zygfryda zakochała się w księciu Teosiu. Problem jest w tym, że jest jak ten serek od Kaprrisa 'homogenizowany'.";
             }
             if (a == 3) {
-                gossip = "Kowal Ben nosi różowe stringi.";
+                gossip = "Kowal Ben nosi różowe stringi. Przynajmniej tak słyszałem";
             }
             if (a == 4) {
                 gossip = "Idąc na wschód od 'Bramy Słońca' trafisz do zapomnianej świątyni 'Sióstr Niewidzącego Oka'.";
@@ -51,16 +66,16 @@
                 gossip = "Powiedzieć 'przepraszam' bywa trudno. Powiedzieć 'kocham' jeszcze trudniej, ale powiedzieć 'nie lej już więcej' to jest już nie wykonalne.";
             }
             if (a == 7) {
-                gossip = "Plotka7";
+                gossip = "Kochać coś, to pragnąć aby to żyło";
             }
             if (a == 8) {
-                gossip = "Plotka8";
+                gossip = "'Puszka Rahodrimów' umożliwia tworzenie przedmiotów, których nie byliby wstanie wykonać rzemieślnicy. Nazywamy to transmutacją, jednak poza tą funkcją może służyć również za dodatkowe miejsce w ekwipunku. Szczegóły u producenta.";
             }
             if (a == 9) {
-                gossip = "Plotka9";
+                gossip = "Józek zamiast jak człowiek siedzieć w knajpie i konserwować się od wewnątrz, to lata po polach za różnymi paskudztwami. Widziałeś może go?";
             }
             if (a == 10) {
-                gossip = "Plotka10";
+                gossip = "Przechodź spokojnie przez hałas i pośpiech, i pamiętaj, jaki spokój można znaleźć w ciszy. Pod warunkiem, że się nie pobłądzi.";
             }
             executionTxt.text = gossip;
         }
@@ -140,22 +155,26 @@
             //QuestController.Instance.m_questList[rand].questIsAll = true;
         }
 
+        private void VisibleGossip() {
+            OffTavernPanels();
+            m_gossip.SetActive(true);
+        }
+
         private void VisibleQuest() {
             OffTavernPanels();
-            executionTxt.gameObject.SetActive(false);
             m_quest.SetActive(true);
         }
 
         private void VisibleRoom() {
             OffTavernPanels();
-            executionTxt.gameObject.SetActive(false);
             m_room.SetActive(true);
         }
 
         private void OffTavernPanels() {
-            executionTxt.gameObject.SetActive(true);
+            m_gossip.SetActive(false);
             m_quest.SetActive(false);
             m_room.SetActive(false);
+            m_greetings.SetActive(false);
         }
 
         public void AcceptRoom() {
